@@ -1,0 +1,34 @@
+
+"    Source       Destination         Call Type  Start Time  Duration   Count  "
+"    Source       Destination         Call Type  Start Time  Duration   Count  ");
+"Source                            Destination     Type StrtTime Duration Count");
+ bbbssssscssssssssssssssssssss ddddddddddddddddddddbxxx xx:xx:xx dd:dd:dd ccccc"
+	   "   %5"SDNS_BF"%c%02d %-16"SDNS_BF"           %03d  %02x:%02x:%02x %02d:%02d:%02d %05d",
+src,used_for_conference,src_type,dst,record_type,call_hr,call_min,call_sec,dur_hr,dur_min,dur_sec,cnt);
+ bbbssssscss ddddddddddddddddbbbbbbbbbbbxxx12345678xx:xx:xx  dd:dd:dd	cccccbb
+
+	   "   %5"SDNS_BF"%c%02d %-16"SDNS_BF"           %03d        %02x:%02x:%02x  %02d:%02d:%02d   %05d",
+src,used_for_conference,src_type,dst,record_type,call_hr,call_min,call_sec,dur_hr,dur_min,dur_sec,cnt);
+ bbbssssscss ddddddddddddddddbbbbbbbbbbbxxx
+
+		 "%10"SDNS_BF"%c %-16"SDNS_BF"           %03d        %02x:%02x:%02x  %02d:%02d:%02d   %05d",
+src,used_for_conference,dst,record_type,call_hr,call_min,call_sec,dur_hr,dur_min,dur_sec,cnt);
+ ssssssssssc ddddddddddddddddbbbbbbbbbbbxxx
+
+"   %5"SDNS_BF"%c%02d %5"SDNS_BF" %02d                   %03d        %02x:%02x:%02x  %02d:%02d:%02d   %05d",
+src,used_for_conference,src_type,dst, dst_type, record_type,call_hr,call_min,call_sec,dur_hr,dur_min,dur_sec,cnt);
+ bbbssssscss ddddd ddbbbbbbbbbbbbbbbbbbbxxx
+
+		       "   %5"SDNS_BF"%c%02d %-20s       %03d        %02x:%02x:%02x  %02d:%02d:%02d   %05d",
+src,used_for_conference,src_type,dgt_string,/*dst,*/record_type,call_hr,call_min,call_sec,dur_hr,dur_min,dur_sec,cnt);
+ bbbssssscss ddddddddddddddddddddbbbbbbbxxx
+ bbbssssscssssssssssssssssssss ddddddddddddddddddddbxxx
+
+      "%10"SDNS_BF"%c %5"SDNS_BF" %02d                   %03d        %02x:%02x:%02x  %02d:%02d:%02d   %05d",
+src,used_for_conference,dst, dst_type, record_type,call_hr,call_min,call_sec,dur_hr,dur_min,dur_sec,cnt);
+ ssssssssssc ddddd ddbbbbbbbbbbbbbbbbbbbxxx
+			     "%10"SDNS_BF"%c %-20s       %03d        %02x:%02x:%02x  %02d:%02d:%02d   %05d",
+ ssssssssssc ddddddddddddddddddddbbbbbbbxxx
+src,used_for_conference,dgt_string,/*dst,*/record_type,call_hr,call_min,call_sec,dur_hr,dur_min,dur_sec,cnt);
+
+

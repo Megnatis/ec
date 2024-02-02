@@ -1,0 +1,117 @@
+
+#ifdef LAPB
+BYTE hwtx[NO_LAPB_CH][HWBUF_SIZE];
+BYTE hwrx[NO_LAPB_CH][HWBUF_SIZE];
+
+BUF hwrx_st[NO_LAPB_CH];
+BUF hwtx_st[NO_LAPB_CH];
+
+//BYTE tmprx[MAX_PACKET_SIZE];
+
+BYTE sync_ok_count[NO_LAPB_CH];
+BYTE sync_loss_count[NO_LAPB_CH];
+BYTE sync_flag[NO_LAPB_CH];
+
+/* it is necessary to have a temp receive array for counting receiving	   */
+/* bytes because size of packet is the first byte that should be written   */
+/* to hwrx() */
+
+
+/* Common FIFO buffers between physical layer and link layer. */
+
+FUNC_PTR link_rtn[MAX_STATE][MAX_EVENT];
+
+/* nettx_st2 is used for reading data,but not removing them  from nettx[]    */
+/* front and rear of these variables are used for reading maximum 7 frames.  */
+/* data for each frame is  removed from nettx[] array after receiving ACK.   */
+
+#ifdef SYSTEM_SIDE
+#if ((defined RSU_CCSV5_INSTALLED) || (defined RSUSIDE))
+BYTE nettx_rsu[TOTAL_NO_CCSV5_GROUP][RSU_NETBUF_SIZE];
+BYTE netrx_rsu[TOTAL_NO_CCSV5_GROUP][RSU_RX_NETBUF_SIZE];
+#endif
+#if ((defined HDLC_RS232) || (defined MY_UDP_FOR_OAM))
+BYTE nettx_oam[NO_OPRTR][OAM_NETBUF_SIZE];
+BYTE netrx_oam[NO_OPRTR][OAM_RX_NETBUF_SIZE];
+#endif
+#ifdef HTBY_LINK_ON_MY_UDP
+BYTE nettx_htby[1][HTBY_NETBUF_SIZE];
+BYTE netrx_htby[1][HTBY_RX_NETBUF_SIZE];
+#endif
+#endif //SYSTEM_SIDE
+
+#ifdef OPERATOR_SIDE
+BYTE nettx_oam[NO_LAPB_CH][OAM_NETBUF_SIZE];
+BYTE netrx_oam[NO_LAPB_CH][OAM_RX_NETBUF_SIZE];
+#endif
+
+BUF nettx_st[NO_LAPB_CH];
+/* variable including &nettx[0],front,rear and size used for reading and
+   writing to nettx[] FIFO buffer.*/
+BUF nettx_st2[NO_LAPB_CH];
+/* variable including &nettx[0],front,rear and size used for dummy
+   reading and writing to nettx[] FIFO buffer.*/
+BUF netrx_st[NO_LAPB_CH];
+/* variable including &netrx[0],front,rear and size used for reading and
+   writing to nettx[] FIFO buffer.*/
+
+WIN_ST retxwin[NO_LAPB_CH][RETX_WIN_BUF_SIZE];
+
+WINBUF retxwin_st[NO_LAPB_CH];
+
+BYTE Vs[NO_LAPB_CH] ;  /* Send State Variable.The sequence number it will assign */
+	   /* to the next I_FRAME to be transmitted .*/
+BYTE Vr[NO_LAPB_CH] ;  /* Receive State Variable.The next in_sequence I_FRAME it */
+	   /* expects to receive. */
+
+RXFRAME_ST curr_rx[NO_LAPB_CH];
+TXFRAME_ST curr_tx[NO_LAPB_CH];
+TIMER_ST publictmr[NO_LAPB_CH];
+
+BYTE remote_stn[NO_LAPB_CH] ;
+BYTE local_stn[NO_LAPB_CH];
+
+BYTE retx_index[NO_LAPB_CH]; /* index of the frame in retxwin which is ready for	     */
+		 /* for retransmission.(because of TIMEOUT or receiving REJ) */
+BYTE REJ_flag[NO_LAPB_CH];	/* Having sent one REJ frame, station does not send    */
+		/* any further REJ frames until a correct frame has    */
+		/* been received. This flag is set if one REJ is sent. */
+
+BYTE state[NO_LAPB_CH];
+HDLC_ST hdlc_ch[NO_LAPB_CH];
+BYTE lapb_link_flag[NO_LAPB_CH];
+
+BYTE dbg_event;
+
+#if ((defined LINKLAYER_DEBUG_ACT) && (!defined DO_NOT_WRITE_TO_LAPB_DEBUG_FILE))
+#if ((defined SYSTEM_SIDE) && (defined PC_COMPATIBLE)) || \
+    ((defined OPERATOR_SIDE) && (defined OPERATOR_PC))
+FILE *lapb_fer;
+#endif
+#endif
+
+BYTE lapb_dbg_flg;
+BYTE tst_flg;
+
+BYTE partial_packet[NO_LAPB_CH][MAX_PACKET_SIZE];
+BYTE partial_packet_indx[NO_LAPB_CH];
+
+BYTE lapb_tx_packet_already_sent[NO_LAPB_CH];
+
+BYTE hwrx_lapb_scn_no;
+BYTE hwtx_lapb_scn_no;
+BYTE link_lapb_scn_no;
+
+#ifdef HDLC_RS232
+#ifdef SYSTEM_SIDE
+#ifdef ALARM_PANEL_ON_HDLC_RS232
+BYTE nettx_alarm[ALARM_NETBUF_SIZE];
+#endif
+#endif
+#endif
+
+#endif	// LAPB
+
+#if ((defined HDLC_RS232) || (defined MY_UDP_FOR_OAM))
+unsigned int check_link_count[NO_LAPB_CH];
+#endif

@@ -1,0 +1,27 @@
+-2 -M -w -C -eopr.exe -Ic:\ec\work\spec  -mh
+omain.c
+oprtn.c
+oprmenu.c
+pdul.c
+db.c
+onet.c
+wf.c
+params.c
+cpf.c
+depm.c
+deprtn.c
+ep.c
+filevar1.c
+filevar2.c
+filevar3.c
+filevar5.c
+dep_parm.c
+c:\ec\work\sys\lapb.c
+c:\ec\work\sys\sml.c
+c:\ec\work\sys\smllyr1.c
+c:\ec\work\sys\glb_rtns.c
+mnul_tst.c
+gcc_func.c
+dpi_file.c
+btch_ep.c
+

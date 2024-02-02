@@ -1,0 +1,2 @@
+-Ic:\ec\work\spec -O3 -Wall -Wno-unknown-pragmas -Wno-unused-label -c
+

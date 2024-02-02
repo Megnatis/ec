@@ -1,0 +1,40 @@
+
+//CHEEN : file added
+
+#ifdef TCP_ON_CLIENT_SIDE
+pthread_t tcp_trx_client_thread[MAX_TCP_GROUP];
+#endif
+
+#ifdef TCP_ON_SERVER_SIDE
+pthread_t tcp_rx_server_thread[MAX_TCP_GROUP];
+#endif
+
+#if ((defined TCP_ON_CLIENT_SIDE) || (defined TCP_ON_SERVER_SIDE))
+unsigned int max_tcp_connection,max_tcp_group;
+unsigned int first_tcp,last_tcp;
+TCP_GROUP_STRUCT tcp_grp_st[MAX_TCP_GROUP];
+TCP_STRUCT tcp_st[MAX_TCP_CONNECTION];
+#ifdef TCP_DEBUG_ACT
+FILE *tcp_fer;
+unsigned int tcp_reopen_cnt;
+#endif
+#endif
+
+#if ((defined TCPIP_ON_SYS_OAM_OPERATOR_SIDE) || (defined TCPIP_ON_SYS_OAM_SYSTEM_SIDE))
+unsigned int tcp_link_0;
+unsigned int tcp_link_1;
+unsigned int max_sys_oam_tcp_link;
+TCP_LINK_STRUCT tcp_link_st[MAX_SYS_OAM_TCP_LINK];
+#endif
+
+//APOLO start 
+#ifdef SYSTEM_SIDE
+#ifdef HTBY_LINK_ON_TCPIP
+TCP_HTBY_LINK_STRUCT	tcp_htby_link;
+#endif
+#endif
+//APOLO end
+
+
+
+

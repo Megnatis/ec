@@ -1,0 +1,8 @@
+#echo $1
+#echo $2
+find . -name "$1" -print | xargs grep  -e "$2"  -r  -n  -e "$3" -e "$4" >r2
+#find . -name "$1" -print | xargs grep  -e "$2"  -r  -n   >r2
+#find . -name '*.*' -print | xargs grep  -e "$1"  -r  >r2
+#find . -name '*.*' -print | xargs grep  -e "$1"  -r  /dev/null
+#find . -name '*.*' -print | xargs grep -l -e 'COMPILER == GCC' -r /dev/null
+cat r2

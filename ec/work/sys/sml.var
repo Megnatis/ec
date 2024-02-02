@@ -1,0 +1,47 @@
+
+#ifdef HDLC_RS232
+
+#ifndef SERIAL_INTERFACE_ACTIVE 	// CPU_EC512
+SRL_PORT_ST srl_port[NO_NEW_SRL_LINK];
+#endif
+
+BYTE hdlc_link_state[NO_NEW_HDLC_COM_PORT];		      // link state
+BYTE hdlc_received_bcc[NO_NEW_HDLC_COM_PORT];		      // received BCC
+
+BYTE rcv_st[NO_NEW_HDLC_COM_PORT];
+BYTE rcv_size[NO_NEW_HDLC_COM_PORT];		    // pointer to received data array
+BYTE rcv_dat[NO_NEW_HDLC_COM_PORT][MAX_HDLC_DATA_SIZE]; // where received data is put
+
+BYTE bkup_rcv_st[NO_NEW_HDLC_COM_PORT];
+BYTE bkup_rcv_size[NO_NEW_HDLC_COM_PORT];		 // pointer to received data array
+BYTE bkup_rcv_dat[NO_NEW_HDLC_COM_PORT][MAX_HDLC_DATA_SIZE]; // where received data is put
+
+HDLC_FUNC_PTR hdlc_rtn[NO_HDLC_STATES]; // state/stim array
+
+BYTE com_hwtx[NO_NEW_HDLC_COM_PORT][COM_HWBUF_SIZE];
+BYTE com_hwrx[NO_NEW_HDLC_COM_PORT][COM_HWBUF_SIZE];
+
+BUF com_hwrx_st[NO_NEW_HDLC_COM_PORT];
+BUF com_hwtx_st[NO_NEW_HDLC_COM_PORT];
+
+BYTE hdlc_dbg_flg[NO_NEW_HDLC_COM_PORT];
+
+#ifdef USE_INTERRUPT_FOR_HDLC_RS232
+#if COMPILER != GCC
+void interrupt (*old_serial1)(void);	      /* old serial_port ISR */
+void interrupt (*old_serial2)(void);	      /* old serial_port ISR */
+#endif
+
+#if COMPILER == GCC
+_go32_dpmi_seginfo  old_serial1;
+_go32_dpmi_seginfo  old_serial2;
+#endif
+#endif
+
+//BYTE nettx[NO_LAPB_CH][NETBUF_SIZE];
+
+#ifdef SML_DEBUG
+FILE *sml_fp;
+#endif
+#endif // HDLC_RS232
+

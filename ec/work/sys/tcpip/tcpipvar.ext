@@ -1,0 +1,127 @@
+
+/*************	Time-stamp: <2009-03-04 09:49:08 savoj>   ************/
+#ifdef ETHERNET_INSTALLED
+extern PACKET_DRIVER_STRUCT pktdrvr_st[PK_MAX];
+extern BUF pktdrvr_tx_st[PK_MAX];
+extern guint8 pktdrvr_tx[PK_MAX][PK_BUF_SIZE];
+//extern BUF pktdrvr_rx_st[PK_MAX];
+//extern guint8 pktdrvr_rx[PK_MAX][PK_BUF_SIZE];
+#endif // ETHERNET_INSTALLED
+
+#ifdef ARP_INSTALLED
+/* Hash table headers */
+extern ARP_TAB_STRUCT *Arp_tab[HASHMOD];
+extern ARP_STAT_STRUCT Arp_stat;
+/* ARP protocol linkages, indexed by arp's hardware type */
+extern ARP_TYPE_STRUCT Arp_type[NHWTYPES];
+extern guint8 Ether_bdcst[6];
+#endif // ARP_INSTALLED
+
+#ifdef IP_INSTALLED
+extern IFACE_STRUCT iface_st[MAX_IFACE];
+extern unsigned int Ifaces;
+extern BUF ip_tx_st[MAX_IFACE];
+extern BUF ip_rx_st[MAX_IFACE];
+extern guint8 ip_rx[MAX_IFACE][IP_BUF_SIZE];
+extern guint8 ip_tx[MAX_IFACE][IP_BUF_SIZE];
+extern IP_ROUTE_STRUCT ip_route_st[NO_IP_ROUTE];
+extern unsigned int eq_ip_route_st;
+extern unsigned int fq_ip_route_st;
+extern ROUTE_CACHE_STRUCT Rt_cache[HASHMOD];
+extern guint32 Rtlookups;
+extern guint32 Rtchits;
+extern unsigned int Routes[32][HASHMOD];       /* Routing table */
+extern unsigned int R_default;		       /* Default route entry */
+extern unsigned int hopperq_e;
+extern unsigned int hopperq_f;
+extern HOPPER_QUE_STRUCT hopperq[HOPPER_QUE_LEN];
+extern MIB_ENTRY_STRUCT Ip_mib[NUMIPMIB];
+extern unsigned int Id_cntr;		/* Datagram serial number */
+extern REASM_STRUCT *Reasmq;
+#ifdef ROUTER_SYSTEM
+extern ROUTER_STRUCT router_st[MAX_ROUTER_PATH];
+#endif
+extern int Derr;
+#endif // IP_INSTALLED
+
+#ifdef TCP_INSTALLED
+extern MIB_ENTRY_STRUCT Tcp_mib[MAX_TCP_MIB];
+extern TCB_STRUCT tcb_st[MAX_TCB];
+extern unsigned int eq_tcb_st;
+extern unsigned int fq_tcb_st;
+extern unsigned int Inet_list;
+extern INET_STRUCT inet_st[MAX_INET];
+extern unsigned int eq_inet_st;
+extern unsigned int fq_inet_st;
+extern unsigned int Tcp_window;
+extern unsigned int Tcbs;      /* Head of control block list */
+extern unsigned int Tcp_mss;   /* Maximum segment size to be sent with SYN */
+extern gint32 Tcp_irtt;        /* Initial guess at round trip time */
+extern int Tcp_trace;	       /* State change tracing flag */
+extern int Tcp_syndata;
+extern TCP_RTT_STRUCT Tcp_rtt[RTTCACHE];
+extern int Tcp_tstamps;
+extern guint8 flag;
+extern long msclock_cnt;
+#endif // TCP_INSTALLED
+
+#ifdef UDP_INSTALLED
+extern unsigned int Udps;     /* Hash table for UDP structures */
+extern UCB_STRUCT ucb_st[MAX_UCB];
+extern unsigned int eq_ucb_st;
+extern unsigned int fq_ucb_st;
+extern MIB_ENTRY_STRUCT Udp_mib[MAX_UDP_MIB];
+#endif // UDP_INSTALLED
+
+
+#if ((defined TCP_INSTALLED) || (defined UDP_INSTALLED))
+extern USOCK_STRUCT usock_st[MAX_USOCK];
+extern unsigned int eq_usock_st;
+extern unsigned int fq_usock_st;
+extern unsigned int Nsock;
+extern int errno;
+extern int Net_error;
+extern unsigned int Lport;
+#endif
+
+#ifdef ETHERNET_INSTALLED
+#if ((defined MY_TCPIP_FOR_OAM) || (defined MY_UDP_FOR_OAM) ||\
+     (defined HTBY_LINK_ON_MY_UDP) || (defined KIATEL_UDP_FOR_OAM) ||\
+     (defined KFTPD_INSTALLED) || (defined KFTP_INSTALLED) ||\
+     (defined ROS_FOR_LI_INSTALLED) || (defined TELNETD_INSTALLED) ||\
+     (defined HI1_INSTALLED) || (defined HI1_DISTRIBUTOR) ||\
+     (defined SYSCON_SERVER) || (defined SYSCON_CLIENT) || (defined SYSCONUDP))
+extern unsigned int oam_iface_no;
+#endif
+#endif
+
+#if ((defined KIATEL_UDP_INSTALLED) || (defined OAM_ON_UDP_CLIENT_SERVER_SIDE) || \
+     (defined TCP_INSTALLED))
+extern KIATEL_SYSTEM_STRUCT	kt_system_st;
+#endif
+
+#ifdef KIATEL_UDP_INSTALLED
+extern KIATEL_UDP_STRUCT	kt_udp_rec[MAX_KIATEL_UDP_REC];
+#ifdef SYSTEM_SIDE
+extern guint			fq_kt_udp_rec, eq_kt_udp_rec;
+extern guint			first_allocated_kt_udp,last_allocated_kt_udp;
+extern KT_GHashTable		*kt_udp_hash_table;
+#endif
+#endif
+
+#if ((defined KIATEL_UDP_FOR_OAM) && (defined SYSTEM_SIDE))
+extern WINOAM_RCRD winoam[NO_KIATEL_UDP_OAM_TERMINAL];
+#endif
+#if ((defined SYSCONUDP) && (defined SYSTEM_SIDE))
+extern SYSCONUDP_RCRD sysconudp[NO_KIATEL_UDP_SYSCONUDP];
+#endif
+
+#ifdef ICMP_INSTALLED
+extern struct mib_entry Icmp_mib[];
+extern int Icmp_trace;
+extern int Icmp_echo;
+/* ICMP messages, decoded */
+extern char *Icmptypes[],*Unreach[],*Exceed[],*Redirect[],*Said_icmp[];
+extern struct icmplink Icmplink[];
+extern volatile gint32 Clock;
+#endif
